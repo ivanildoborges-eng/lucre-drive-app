@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "Entry": {
+      "title": "Entry",
+      "description": "A single financial entry (earning or expense)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["earning", "expense"] },
+        "amount": { "type": "number" },
+        "date": { "type": "string", "format": "date-time" },
+        "platform": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "miles": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["type", "amount", "date", "userId"]
+    },
+    "UserSettings": {
+      "title": "User Settings",
+      "description": "User preferences and goals",
+      "type": "object",
+      "properties": {
+        "monthlyGoal": { "type": "number" },
+        "currency": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/entries/{entryId}": {
+      "schema": "Entry",
+      "description": "Collection of all financial records"
+    },
+    "/users/{userId}/settings/current": {
+      "schema": "UserSettings",
+      "description": "Private settings for each user"
+    }
+  }
+}
